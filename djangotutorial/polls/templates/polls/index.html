@@ -1,0 +1,154 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akademik Yaşam Anketi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --accent-color: #2563eb;
+            --accent-hover: #1d4ed8;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            color: var(--text-primary);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .hero-section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 4rem 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: inline-block;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        p.description {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            line-height: 1.6;
+            margin-bottom: 3rem;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-start {
+            background-color: var(--accent-color);
+            color: white;
+            font-weight: 600;
+            font-size: 1.125rem;
+            padding: 1rem 3rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: inline-block;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+        }
+
+        .btn-start:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 8px -1px rgba(37, 99, 235, 0.3);
+            color: white;
+        }
+        
+        .footer {
+            margin-top: 3rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            opacity: 0.7;
+        }
+
+        /* Subtle background pattern */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 24px 24px;
+            opacity: 0.4;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="hero-section">
+            <div class="logo">Kampüs Analiz</div>
+            
+            <h1>Akademik Yaşam Anketi</h1>
+            
+            <p class="description">
+                Üniversite deneyiminizi şekillendiren anları keşfedin. 
+                Sadece 10 kısa soruda kampüs hayatına bakışınızı paylaşın.
+            </p>
+            
+            {% if first_question %}
+                <a href="{% url 'polls:detail' first_question.id %}" class="btn-start">Ankete Başla</a>
+            {% else %}
+                <div style="color: #ef4444; font-weight: 500;">
+                    Anket şu anda aktif değil.
+                </div>
+            {% endif %}
+        </div>
+        
+        <div class="footer">
+            &copy; 2026 Akademik Araştırma Birimi
+        </div>
+    </div>
+
+</body>
+</html>
+{% endblock %}
