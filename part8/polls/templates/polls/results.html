@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anket Sonuçları</title>
+    <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+</head>
+<body>
+<div class="container">
+    <h1>{{ question.question_text }}</h1>
+
+    <ul>
+    {% for choice in question.choice_set.all %}
+        <li>
+            <a href="#">
+                {{ choice.choice_text }} 
+                <span class="vote-count">{{ choice.votes }} oy</span>
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+
+    <a href="{% url 'polls:detail' question.id %}" style="text-align: center; margin-top: 1.5rem; background: var(--primary); color: white;">Fikrini Değiştir (Tekrar Oy Ver)</a>
+    <div style="margin-top: 1rem;">
+        <a href="{% url 'polls:index' %}" style="text-align: center;">Tüm Anketlere Dön</a>
+    </div>
+</div>
+</body>
+</html>
